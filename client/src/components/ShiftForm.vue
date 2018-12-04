@@ -20,7 +20,7 @@
           <b-form-input class="col-6" v-model="role" type="text" id="shift-role" aria-describedby="shift-role" placeholder="Enter Role"></b-form-input>
         </b-form-group>
         <b-form-group label="Priority">
-          <b-form-radio-group id="radioPriority" buttons v-model="selected" name="priority" inline>
+          <b-form-radio-group id="radioPriority" buttons v-model="priority" name="priority" inline>
             <b-form-radio value="low">Low</b-form-radio>
             <b-form-radio value="high">High</b-form-radio>
             <b-form-radio value="urgent">Urgent</b-form-radio>

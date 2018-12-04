@@ -72,7 +72,7 @@ export default {
 }
 body {
 background-image: radial-gradient(rgb(248, 241, 241), rgb(146, 143, 143));
-height: 100vh;
+height: 100%;
 }
 
 </style>

@@ -37,7 +37,7 @@ import Login from '@/components/Login'
 import { mdbCarousel, mdbCarouselItem } from 'mdbvue'
 
 export default {
-  name: 'CarouselPage',
+  name: 'Home',
   components: {
     // components,
     ShiftList,
@@ -48,3 +48,4 @@ export default {
     mdbCarouselItem
   }
 }
+</script>

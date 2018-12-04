@@ -4,37 +4,66 @@
       <h3>Current Shifts:</h3>
 
 <accordion :panes="panes"/>
+<!-- Modal Component -->
+  <b-modal id="modalPrevent"
+          ref="modal"
+          title="Submit your name to claim this shift"
+          @ok="handleOk"
+          @shown="clearName">
+  <form @submit.stop.prevent="handleSubmit">
+    <pre>{{ selectedShift }}</pre>
+    <b-form-input type="text"
+                  placeholder="Enter your name"
+                  v-model="myName"
+                  ></b-form-input>
+  </form>
+  <b-btn id="shiftClaim" @click="claimShift(selectedShift.id)">Claim Shift</b-btn>
+  </b-modal>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-import shiftService from "@/services/shiftService";
-import { Accordion } from 'mdbvue';
-var moment = require('moment');
-moment().format();
+import shiftService from '@/services/shiftService'
+import { Accordion } from 'mdbvue'
+var moment = require('moment')
+moment().format()
 
 export default {
-  name: "ShiftList",
+  name: 'ShiftList',
   data: () => ({
     shifts: [],
-    panes: []
+    panes: [],
+    isShown: false,
+    selectedShift: {},
+    myName: ''
   }),
-  created() {
-    this.updateShifts();
+  created () {
+    this.updateShifts()
   },
   methods: {
-    updateShifts() {
+    toggleModal () {
+      if (this.isShown) {
+        this.$refs.modal.hide()
+      } else {
+        this.$refs.modal.show()
+      }
+      this.isShown = !this.isShown
+    },
+    claimClicked (shift) {
+      this.selectedShift = shift
+      this.toggleModal()
+    },
+    updateShifts () {
       shiftService.all().then(res => {
-        this.shifts = res.data;
-      for (let i = 0; i < this.shifts.length; i++){
+        this.shifts = res.data
+        for (let i = 0; i < this.shifts.length; i++) {
         // })
-        let pane = {}
-        pane.title = `${res.data[i].name} 
+          let pane = {}
+          pane.title = `${res.data[i].name} 
                       <br>
-                      ${moment(res.data[i].date,'YYYY-MM-DD hh:mm:ss').format('MM-DD-YYYY')}`
-        pane.content = `
+                      ${moment(res.data[i].date, 'YYYY-MM-DD hh:mm:ss').format('MM-DD-YYYY')}`
+          pane.content = `
         <table class="table table-responsive">
         <thead>
             <tr>
@@ -48,7 +77,7 @@ export default {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="shift in shifts" :key="shift.id">
+            <tr>
               <td>${res.data[i].id}</td>
               <td>${res.data[i].reason}</td>
               <td>${res.data[i].duration}</td>
@@ -63,26 +92,58 @@ export default {
             </table>
             <table class="table table-responsive">
               <ul class="list-inline" style="list-style-type: none;">
-                <li class="list-inline-item"><b-btn class="btn btn-success m-2">Claim</b-btn
+                <li class="list-inline-item"><b-btn class="btn btn-success m-2">Claim</b-btn>
                 <li class="list-inline-item"><b-btn class="btn btn-success m-2">Edit</b-btn>
-                <li class="list-inline-item"><b-btn @click="deleteShift(shift.id)" class="btn btn-danger delete m-2">x</b-btn>
+                <li class="list-inline-item"><b-btn @click="deleteShift({{ selectedShift.id }})" class="btn btn-danger delete m-2">x</b-btn>
               </ul>
               </table>
          `
-        this.panes.push(pane)
-      }
-      });
+          pane.id = res.data[i].id
+          this.panes.push(pane)
+        }
+      })
     },
-    deleteShift(id) {
+    deleteShift (id) {
       shiftService.delete(id).then(res => {
-        this.updateShifts();
-      });
+        this.updateShifts()
+      })
+    },
+    claimShift (id) {
+      console.log('successful')
+      this.$refs.modalPrevent.hide()
+      shiftService.update(id).then((res) => {
+        console.log('Claimed Shift Successful')
+      })
+    },
+    editShift (shift) {
+      shiftService.update(this.selectedShift.id).then((res) => {
+        console.log('Edit Shift Successful')
+      })
+    },
+    clearName () {
+      this.myName = ''
+    },
+    handleOk (evt) {
+      // Prevent modal from closing
+      evt.preventDefault()
+      if (!this.myName) {
+        alert('Please enter your name')
+      } else {
+        this.handleSubmit()
+      }
+    },
+    handleSubmit () {
+      this.names.push(this.myName)
+      this.shift.personResponsible = this.myName
+      this.shift.covered = true
+      this.clearName()
+      this.toggleModal()
     }
   },
   components: {
-    Accordion,
+    Accordion
   }
-};
+}
 </script>
 
 <style>
