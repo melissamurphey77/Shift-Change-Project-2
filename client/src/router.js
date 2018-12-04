@@ -13,6 +13,11 @@ export default new Router({
       component: Home
     },
     {
+      path: '/shifts',
+      name: 'shifts',
+      component: () => import(/* webpackChunkName: "about" */ './components/ShiftList.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

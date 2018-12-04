@@ -1,5 +1,6 @@
 <template id="body">
   <div class="row">
+    <div class="container-fluid">
     <div class="col-8 offset-2">
       <h2>Post Shift to Get Covered</h2>
       <form class="clearfix mb-4" @submit.prevent="createShift">
@@ -27,6 +28,7 @@
         </b-form-group>
         <b-btn type="submit" class="btn btn-success mb-4 center delete">Submit</b-btn>
       </form>
+    </div>
     </div>
   </div>
 </template>
@@ -79,7 +81,7 @@ form {
   border-radius: 10px;
   margin-bottom: 25px;
   padding: 30px;
-  background-image: radial-gradient(rgb(207, 252, 201), #42b983)
+  background-image: radial-gradient(rgb(207, 252, 201), #42b983);
 }
 #shift-name {
   margin-left: 25%;

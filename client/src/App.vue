@@ -2,7 +2,7 @@
 <body>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Shifts</router-link> |
+      <router-link to="/shifts">Shifts</router-link> |
       <router-link to="/new-shift">New Shift</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link 
@@ -17,6 +17,10 @@
       to="/login"> Logout</button>
     </div>
     <router-view/>
+    <div id="nav">
+      Powered By
+      <router-link to="/"><img id="logo" src="./assets/shift-change-logo-only.png"></router-link>
+    </div>
   </div>
   </body>
 </template>
@@ -44,7 +48,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   /* background-image: linear-gradient(rgb(248, 241, 241), rgb(146, 143, 143)); */
-  
+
+}
+
+#logo {
+  height: 60px;
 }
 #nav {
   padding: 30px;
@@ -58,9 +66,13 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+#logo {
+  height: 60px;
+}
 body {
 background-image: radial-gradient(rgb(248, 241, 241), rgb(146, 143, 143));
-height: 100vh;  
+height: 100vh;
 }
 
 </style>

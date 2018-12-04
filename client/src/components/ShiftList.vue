@@ -63,9 +63,9 @@ export default {
             </table>
             <table class="table table-responsive">
               <ul class="list-inline" style="list-style-type: none;">
-                <li class="list-inline-item"><b-btn class="btn btn-success">Claim</b-btn
-                <li class="list-inline-item"><b-btn class="btn btn-success">Edit</b-btn>
-                <li class="list-inline-item"><b-btn @click="deleteShift(shift.id)" class="btn btn-danger delete">x</b-btn>
+                <li class="list-inline-item"><b-btn class="btn btn-success m-2">Claim</b-btn
+                <li class="list-inline-item"><b-btn class="btn btn-success m-2">Edit</b-btn>
+                <li class="list-inline-item"><b-btn @click="deleteShift(shift.id)" class="btn btn-danger delete m-2">x</b-btn>
               </ul>
               </table>
          `
@@ -85,16 +85,33 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+
 h3 {
   color: #42b983;
 }
 th {
   font-size: 18px;
 }
-tbody {
-  background-image: linear-gradient(rgb(207, 252, 201), #42b983);
-  box-shadow: 0 0 40px black;
+
+div.card-header {
+  background-image: radial-gradient(rgb(207, 252, 201), #42b983);
+  border-radius: 8px;
+  box-shadow: 0 0 30px black;
+  margin-bottom: 10px;
+}
+
+div.card-header > h5 > button.btn.btn-link {
+  color: black;
+}
+
+ div.collapse-item.card-body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html {
+  overflow-y: scroll;
 }
 
 </style>
