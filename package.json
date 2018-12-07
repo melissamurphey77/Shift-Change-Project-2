@@ -10,11 +10,11 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "yarn global add @vue/cli-service-global && cd client && yarn install",
+    "start": "if-env NODE_ENV=production && yarn start:prod || yarn start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*' server.js\" \"yarn client\"",
     "client": "cd client && yarn build:dev",
-    "install": "cd client && yarn install",
+    "install": "yarn global add @vue/cli-service-global && cd client && yarn install",
     "build": "cd client && yarn build",
     "heroku-postbuild": "yarn build",
     "lint": "eslint \"**/*.js\" --quiet && cd client && yarn lint",
