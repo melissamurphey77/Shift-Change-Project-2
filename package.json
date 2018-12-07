@@ -14,7 +14,7 @@
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*' server.js\" \"yarn client\"",
     "client": "cd client && yarn build:dev",
-    "install": "yarn global add @vue/cli-service-global && cd client && yarn install",
+    "install": "cd client && yarn install",
     "build": "cd client && yarn build",
     "heroku-postbuild": "yarn build",
     "lint": "eslint \"**/*.js\" --quiet && cd client && yarn lint",
